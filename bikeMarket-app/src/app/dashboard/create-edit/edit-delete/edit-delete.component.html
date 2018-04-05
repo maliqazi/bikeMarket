@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div *ngFor = 'let content of bicycle'>
+    <form  #editData='ngForm'>
+      Title
+      <input
+        type="text"
+        name="title"
+        [value]='content.title'
+        [(ngModel)]="content.title"
+        #title='ngModel'
+      />
+      Description
+      <input
+        type="text"
+        name="description"
+        [value]='content.description'
+        [(ngModel)]="content.description"
+        #description='ngModel'
+      />
+      Price
+      <input
+        type="text"
+        name="price"
+        [value]='content.price'
+        [(ngModel)]="content.price"
+        #price='ngModel'
+      />
+      Location
+      <input
+        type="text"
+        name="location"
+        [value]='content.location'
+        [(ngModel)]="content.location"
+        #location='ngModel'
+      />
+      <input
+        type="hidden"
+        name="_id"
+        [value]='content._id'
+        [(ngModel)]='content._id'
+        #_id='ngModel'
+      />
+      <input
+        type="hidden"
+        name="_user"
+        [value]='content._user'
+        [(ngModel)]='content._user'
+        #_user='ngModel'
+      />
+      <button  type='submit' (click)="updateBicycle(editData)">Update</button>
+      <button  type='submit' (click)="deleteBicycle(editData)">Delete</button>
+    </form>
+  </div>
+</div>

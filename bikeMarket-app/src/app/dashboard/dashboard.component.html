@@ -1,0 +1,7 @@
+<h2>Welcome {{first_name}} {{last_name}}</h2>
+<nav>
+  <a [routerLink]="['browse',user_id]">Browse</a> |
+  <a [routerLink]="['listings',user_id]">My Listings</a> |
+  <button (click)='logoff()'>Log Off</button>
+</nav>
+<router-outlet></router-outlet>
