@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
   filterApplied: boolean;
   // transform<T extends object>(elements: T[], filter: T): Array<T> {
-  transform<any>(elements: T[], filter: any): Array<any> {
+  transform<T>(elements: T[], filter: any): Array<any> {
     console.log('searching, get elements and filter form pipe', elements, filter);
 
     if (!elements || !filter) {
@@ -15,10 +15,9 @@ export class SearchPipe implements PipeTransform {
     }
 
     return elements.filter(element => this.applyFilter(element, filter));
-
   }
 
-  private applyFilter<any>(element: T, filter: any): boolean {
+  private applyFilter<T>(element: T, filter: any): boolean {
     console.log('bicycle in apply filter', element, filter);
 
     // for ( const field in filter) {
@@ -37,12 +36,15 @@ export class SearchPipe implements PipeTransform {
     //   if (values.toString().toLowerCase().includes(filter.toString().toLowerCase())) { console.log('it matches'); this.filterApplied=true; break;}
     //   else { console.log('it doesnt '); this.filterApplied=false;}
     // });
-    this.filterApplied=false;
+    this.filterApplied = false;
 
-    for (let key of Object.keys(element)) {
+    for (const key of Object.keys(element)) {
       console.log('values', element[key]);
-      if (element[key].toString().toLowerCase().includes(filter.toString().toLowerCase())) { console.log('it matches'); this.filterApplied=true; break;}
-      // else { console.log('it doesnt '); this.filterApplied=false;}
+      if ( element[key].toString().toLowerCase().includes(filter.toString().toLowerCase())) {
+        console.log('it matches'); this.filterApplied = true;
+        break;
+      }
+      // else { console.log('it doesnt '); this.filterA pplied=false;}
     }
 
 

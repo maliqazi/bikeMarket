@@ -16,12 +16,13 @@ export class DailyBikeComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    console.log('daily bike', this.dailyBicycle)
+    console.log('daily bike', this.dailyBicycle);
 
-    this._httpService.getBicycles(0).then(res => {
-      let ind = Math.floor(Math.random()*res.bicycle.length);
+    this._httpService.getBicycles(0).subscribe( bicycles => {
+      // console.log('bike', res, res.bicycle)
+      let ind = Math.floor(Math.random()*bicycles.length);
       console.log('random', ind);
-      this.dailyBicycle = res.bicycle[ind];
+      this.dailyBicycle = bicycles[ind];
+    })
   }
-
 }

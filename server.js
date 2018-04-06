@@ -62,31 +62,19 @@ app.get('/api/user/:login_email&:login_password', function(req, res) {
    console.log('session id before login is ', req.session )
     console.log('from server js', req.params)
 
-    User.find({'email': req.params.login_email, "password": req.params.login_password}, function(err, user) {
+    User.findOne({'email': req.params.login_email, "password": req.params.login_password}, function(err, user) {
       console.log('returned from mongo', user)
       req.session.name = req.params.login_email+'session'
       console.log('session id is ', req.session.name )
-      res.json({user:user, sessionName:req.session.name})
-    })
-})
-
-app.get('/api/user/:login_email&:login_password', function(req, res) {
-   console.log('session id before login is ', req.session )
-    console.log('from server js', req.params)
-
-    User.find({'email': req.params.login_email, "password": req.params.login_password}, function(err, user) {
-      console.log('returned from mongo', user)
-      req.session.name = req.params.login_email+'session'
-      console.log('session id is ', req.session.name )
-      res.json({user:user, sessionName:req.session.name})
+      res.json({user:user, sessionName:req.session.name});
     })
 })
 
 app.get('/api/user/:_id', function(req, res) {
     console.log('getting user for contact', req.params)
-    User.find({'_id': req.params._id}, function(err, user) {
+    User.findOne({'_id': req.params._id}, function(err, user) {
       console.log('returned from mongo', user)
-      res.json({user:user})
+      res.json(user)
     })
 })
 
@@ -116,7 +104,7 @@ app.post('/api/user', function(req, res) {
 app.post('/api/bicycle', function(req, res) {
     User.findOne({_id: req.body.user_id}, function(err, user) {
       console.log('user returend from mongo', user)
-      console.log('req.body data',               req.body.bicycle.title,
+      console.log('req.body data', req.body.bicycle.title,
                      req.body.bicycle.description,
                      req.body.bicycle.price,
                      req.body.bicycle.location)
@@ -134,6 +122,7 @@ app.post('/api/bicycle', function(req, res) {
              console.log('Error');
            }
            else {
+             console.log('posted bicycle to db', bicycle);
              res.json({bicycle:bicycle, sessionName:req.session.name});
            }
          })
@@ -151,17 +140,17 @@ app.post('/api/bicycle', function(req, res) {
 
  app.get('/api/bicycle/:_id', function(req, res) {
      console.log('get user bicycles', req.params)
-     Bicycle.find({_user: req.params._id}, function(err, bicycle) {
-       console.log("returned bicycles from mongodb", bicycle);
-       res.json({bicycle:bicycle})
+     Bicycle.find({_user: req.params._id}, function(err, bicycles) {
+       console.log("returned bicycles from mongodb", bicycles);
+       res.json(bicycles);
      })
  })
 
  app.get('/api/bicycle', function(req, res) {
      console.log('get all bicycles', req.params)
-     Bicycle.find({}, function(err, bicycle) {
-       console.log("returned all bicycles from mongodb", bicycle);
-       res.json({bicycle:bicycle})
+     Bicycle.find({}, function(err, bicycles) {
+       console.log("returned all bicycles from mongodb", bicycles);
+       res.json(bicycles)
      })
  })
 

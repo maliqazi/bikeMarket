@@ -20,30 +20,33 @@ export class LoginRegistrationComponent implements OnInit {
   }
 
   submitUser() {
-    console.log('submitting user data', this.user)
-     this._httpService.postUser(this.user).then(res => {
-        console.log('back from promise', res.user)
+    console.log('submitting user data', this.user);
+     this._httpService.postUser(this.user).subscribe(user => {
+        console.log('back from promise', user);
 
-         this.goDashboard(res.user);
-     })
+         this.goDashboard(user);
+     });
   }
 
   onlogin() {
     console.log('user object', this.user);
 
-    this._httpService.getUser(this.user).then(res => {
-      console.log('back from promise',res)
-      this.user = res.user;
-      console.log('this.user=res.user', this.user)
+    this._httpService.getUser(this.user).subscribe(response => {
+      console.log('back from promise', response);
+      // for (const key of Object.keys(response)) {
+      //   console.log(response[key]);
+      // }
+      this.user = response['user'];
+      console.log('this.user=res.user', this.user);
 
-      console.log('loggin in ', this.first_name,this.last_name,res.sessionName)
-      if (this.user.length!=0) {
-        this.goDashboard(this.user[0])
+      console.log('loggin in ', this.user.first_name, this.user.last_name);
+      if (this.user) {
+        this.goDashboard(this.user);
       }
-    ))
+    });
   }
   goDashboard(user) {
-     console.log('we got this', user)
-     this._router.navigate(['dashboard',user._id,user.first_name,user.last_name]);
+     console.log('we got this', user);
+     this._router.navigate(['dashboard', user._id, user.first_name, user.last_name]);
   }
 }

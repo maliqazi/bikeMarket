@@ -13,7 +13,11 @@ export class CreateEditComponent implements OnInit {
       private _httpService: HttpService,
       private _route: ActivatedRoute,
       private _router: Router) {
-          this._route.paramMap.subscribe( params => { console.log('params from create edit', params); this.myUserId=params.params._id })
+          this._route.paramMap.subscribe( params => { 
+            console.log('params from create edit', params); 
+            // this.myUserId=params.params._id; 
+            this.myUserId = params.get("_id");
+          });
       }
 
   ngOnInit() {

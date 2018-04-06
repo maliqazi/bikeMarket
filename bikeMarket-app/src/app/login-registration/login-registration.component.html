@@ -59,7 +59,7 @@
       [(ngModel)]="user.email"
       #email='ngModel'
     />
-    <p *ngIf='!email.valid && user.email.length > 0'>Invalid email address</p>
+    <!-- <p *ngIf='!email.valid && user.email.length > 0'>Invalid email address</p> -->
     Password
     <input
       type="text"
@@ -71,7 +71,7 @@
       [(ngModel)]="user.password"
       #password='ngModel'
     />
-    <p *ngIf='!password.valid && user.password.length > 0'>Invalid password: <span *ngIf='password.errors.minlength.actualLength < password.errors.minlength.requiredLength'>Minimum should be 10 characters</span></p>
+    <!-- <p *ngIf='!password.valid && user.password.length > 0'>Invalid password: <span *ngIf='password.errors.minlength.actualLength < password.errors.minlength.requiredLength'>Minimum should be 10 characters</span></p> -->
     <!-- password{{password.errors | json}}
     {{password.valid | json}} -->
     Password Confirmation
@@ -85,7 +85,7 @@
       [(ngModel)]="user.passwordConfirm"
       #passwordConfirm='ngModel'
     />
-    <p *ngIf="passwordConfirm.dirty && user.passwordConfirm != user.password"> Passwords do not match!</p>
+    <!-- <p *ngIf="passwordConfirm.dirty && user.passwordConfirm != user.password"> Passwords do not match!</p> -->
     <button [disabled]="!formData.form.valid || user.passwordConfirm != user.password" type='submit'>Register</button>
   </form>
 Email{{email.errors | json}}

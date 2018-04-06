@@ -1,7 +1,7 @@
 <div class="wrapper">
   <input type="text" name="search" placeholder="search" [(ngModel)]='filter'>
   <!-- <button (click)='filter.title = null'>search</button> -->
-  <div *ngFor = 'let content of bicycle | search:filter'>
+  <div *ngFor = 'let content of bicycles | search:filter'>
     <!-- {{content | json}} -->
     <p>{{content.title}}</p>
     <p>{{content.description}}</p>

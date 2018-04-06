@@ -9,9 +9,9 @@ import { HttpService } from '../http.service';
 })
 export class DashboardComponent implements OnInit {
 
-  first_name: any
-  last_name: any
-  user_id: any
+  first_name: string;
+  last_name: string;
+  user_id: string;
 
   constructor(
     private _httpService: HttpService,
@@ -20,17 +20,18 @@ export class DashboardComponent implements OnInit {
   ) {
       this._route.paramMap.subscribe( params => {
         this._httpService.getSession()
-          .then( res => {
-              this.user_id = params.params._id;
-              this.first_name = params.params.first_name.charAt(0).toUpperCase() + params.params.first_name.slice(1);
-              this.last_name = params.params.last_name.charAt(0).toUpperCase() + params.params.last_name.slice(1);
-              if (!res.sessionName)
-              {
-                console.log("No open session available")
+          .then( sessionName => {
+              this.user_id = params.get('_id');
+              const fname = params.get('first_name');
+              this.first_name = fname.charAt(0).toUpperCase() + fname.slice(1);
+              const lname = params.get('last_name');
+              this.last_name = lname.charAt(0).toUpperCase() + lname.slice(1);
+              if (!sessionName) {
+                console.log('No open session available');
                 this._router.navigate(['login']);
               }
             });
-      })
+      });
     }
 
   ngOnInit() {

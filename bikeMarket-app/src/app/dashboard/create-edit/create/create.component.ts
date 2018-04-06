@@ -18,9 +18,9 @@ export class CreateComponent implements OnInit {
   }
 
   submitBicycle() {
-    console.log('bicycle data', this.bicycle)
-    console.log('input user in create', this.myUserId)
+    console.log('bicycle data', this.bicycle);
+    console.log('input user in create', this.myUserId);
 
-    this._httpService.postBicycle({bicycle: this.bicycle, user_id: this.myUserId})
+    this._httpService.postBicycle({bicycle: this.bicycle, user_id: this.myUserId});
   }
 }

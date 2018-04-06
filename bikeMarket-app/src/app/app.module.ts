@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { LoginRegistrationComponent } from './login-registration/login-registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,7 +31,7 @@ import { SearchPipe } from './search.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    // HttpModule,
     AppRoutingModule,
     HttpClientModule
   ],
